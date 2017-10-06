@@ -301,46 +301,46 @@ public class MainActivity extends AppCompatActivity {
 
     // Uploading Image/Video
     private void uploadMultipleFiles() {
-        progressDialog.show();
-
-        // Map is used to multipart the file using okhttp3.RequestBody
-        File file = new File(mediaPath);
-        File file1 = new File(mediaPath1);
-
-        // Parsing any Media type file
-        final RequestBody requestBody1 = RequestBody.create(MediaType.parse("*/*"), file);
-        RequestBody requestBody2 = RequestBody.create(MediaType.parse("*/*"), file1);
-
-        MultipartBody.Part fileToUpload1 = MultipartBody.Part.createFormData("file1", file.getName(), requestBody1);
-        MultipartBody.Part fileToUpload2 = MultipartBody.Part.createFormData("file2", file1.getName(), requestBody2);
-
-        Log.d(TAG, "uploadMultipleFiles: " + fileToUpload1.toString() + " " + fileToUpload2.toString());
-
-        ApiConfig getResponse = AppConfig.getRetrofit().create(ApiConfig.class);
-        Call<ServerResponse> call = getResponse.uploadMulFile(fileToUpload1, fileToUpload2);
-        call.enqueue(new Callback<ServerResponse>() {
-            @Override
-            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                Log.d(TAG, "onResponse: " + response.body());
-                ServerResponse serverResponse = response.body();
-                if (serverResponse != null) {
-                    if (serverResponse.getSuccess()) {
-                        Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    assert serverResponse != null;
-                    Log.v("Response", serverResponse.toString());
-                }
-                progressDialog.dismiss();
-            }
-
-            @Override
-            public void onFailure(Call<ServerResponse> call, Throwable t) {
-                Log.d(TAG, "onFailure: " + t.toString());
-            }
-        });
+//        progressDialog.show();
+//
+//        // Map is used to multipart the file using okhttp3.RequestBody
+//        File file = new File(mediaPath);
+//        File file1 = new File(mediaPath1);
+//
+//        // Parsing any Media type file
+//        final RequestBody requestBody1 = RequestBody.create(MediaType.parse("*/*"), file);
+//        RequestBody requestBody2 = RequestBody.create(MediaType.parse("*/*"), file1);
+//
+//        MultipartBody.Part fileToUpload1 = MultipartBody.Part.createFormData("file1", file.getName(), requestBody1);
+//        MultipartBody.Part fileToUpload2 = MultipartBody.Part.createFormData("file2", file1.getName(), requestBody2);
+//
+//        Log.d(TAG, "uploadMultipleFiles: " + fileToUpload1.toString() + " " + fileToUpload2.toString());
+//
+//        ApiConfig getResponse = AppConfig.getRetrofit().create(ApiConfig.class);
+//        Call<ServerResponse> call = getResponse.uploadMulFile(fileToUpload1);
+//        call.enqueue(new Callback<ServerResponse>() {
+//            @Override
+//            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+//                Log.d(TAG, "onResponse: " + response.body());
+//                ServerResponse serverResponse = response.body();
+//                if (serverResponse != null) {
+//                    if (serverResponse.getSuccess()) {
+//                        Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                } else {
+//                    assert serverResponse != null;
+//                    Log.v("Response", serverResponse.toString());
+//                }
+//                progressDialog.dismiss();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ServerResponse> call, Throwable t) {
+//                Log.d(TAG, "onFailure: " + t.toString());
+//            }
+//        });
     }
 
 }
