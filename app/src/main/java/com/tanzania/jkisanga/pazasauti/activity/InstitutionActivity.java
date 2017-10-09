@@ -40,6 +40,8 @@ public class InstitutionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_institution);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Paza Sauti");
+        toolbar.setLogo(getResources().getDrawable(R.drawable.ic_action_paza));
         setSupportActionBar(toolbar);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:card_view="http://schemas.android.com/apk/res-auto"
-              android:layout_width="fill_parent"
-              android:layout_height="120dp"
-              android:orientation="vertical">
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="120dp"
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginBottom="2dp"
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
@@ -15,45 +15,41 @@
         card_view:cardCornerRadius="5dp"
         card_view:cardElevation="0.01dp">
 
-        <LinearLayout
-            android:layout_gravity="center"
-            android:orientation="vertical"
+        <RelativeLayout
             android:id="@+id/top_layout"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
 
-
-            <!--<de.hdodenhof.circleimageview.CircleImageView-->
-                <!--android:id="@+id/circleView"-->
-                <!--android:layout_width="80dp"-->
-                <!--android:layout_height="80dp"-->
-                <!--android:layout_marginTop="8dp"-->
-                <!--android:layout_marginLeft="20dp"-->
-                <!--android:layout_alignParentTop="true"-->
-                <!--android:layout_alignParentLeft="true"-->
-                <!--android:src="@drawable/face" />-->
+            <ImageView
+                android:id="@+id/circleView"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:gravity="center"
+                android:src="@drawable/paza"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
 
             <TextView
                 android:id="@+id/title"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="5dp"
-                android:paddingRight="2dp"
-                android:text="Test Text"
+                android:layout_below="@+id/circleView"
+                android:gravity="center_horizontal"
+                android:text="Test"
                 android:textColor="#fff"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/phone_no"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="5dp"
-                android:paddingRight="2dp"
-                android:text="Test Text"
+                android:layout_below="@+id/title"
+                android:gravity="center"
+                android:text="Test"
                 android:textColor="#fff"
-                android:textSize="24sp" />
+                android:textSize="14sp" />
 
-        </LinearLayout>
+        </RelativeLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

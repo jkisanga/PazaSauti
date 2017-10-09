@@ -38,11 +38,11 @@ public class InstitutionAdapter extends RecyclerView.Adapter<InstitutionAdapter.
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public TextView title, phone;
-        LinearLayout linearLayout;
+        RelativeLayout linearLayout;
 
         public MyViewHolder(View view) {
             super(view);
-            linearLayout = (LinearLayout) view.findViewById(R.id.top_layout);
+            linearLayout = (RelativeLayout) view.findViewById(R.id.top_layout);
 
             title = (TextView) view.findViewById(R.id.title);
             phone = (TextView) view.findViewById(R.id.phone_no);

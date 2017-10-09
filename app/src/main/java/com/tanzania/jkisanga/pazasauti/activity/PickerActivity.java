@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +18,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,6 +43,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import cyd.awesome.material.AwesomeButton;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -55,37 +58,42 @@ public class PickerActivity extends AppCompatActivity {
     LinearLayout parentLayout;
     int selectedColor;
     int institutionId;
-    String institutionName;
-    Button multiCaptureButton;
-    Button multiPickerButton;
+    String institutionName, phoneNumbe;
+    AwesomeButton multiCaptureButton;
+    AwesomeButton multiPickerButton;
+    AwesomeButton btnCall, btnSms;
     ImageView callImageView;
     ImageView messageImageView;
     ArrayList<Image> imagesList = new ArrayList<>();
     ProgressDialog progressDialog;
+    EditText txtUjumbe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picker);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         progressDialog = new ProgressDialog(this);
+        btnCall = (AwesomeButton) findViewById(R.id.phone_call);
         progressDialog.setMessage("uploading...");
-Bundle bundle = getIntent().getExtras();
+    Bundle bundle = getIntent().getExtras();
         if(bundle != null){
             institutionId = bundle.getInt(AppConfig.ID);
             //institutionId = 2;
             institutionName = bundle.getString(AppConfig.NAME);
+            phoneNumbe = bundle.getString(AppConfig.PHONE);
             toolbar.setTitle(institutionName);
         }
+        toolbar.setLogo(getResources().getDrawable(R.drawable.ic_action_paza));
+        setSupportActionBar(toolbar);
 
-
+        btnSms = (AwesomeButton) findViewById(R.id.message);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        multiCaptureButton = (Button) findViewById(R.id.multiCaptureButton);
-        multiPickerButton = (Button) findViewById(R.id.multiPickerButton);
-        Button b = (Button) findViewById(R.id.btn_send);
-        callImageView = (ImageView) findViewById(R.id.call);
-        messageImageView = (ImageView) findViewById(R.id.message);
+        multiCaptureButton = (AwesomeButton) findViewById(R.id.multiCaptureButton);
+        multiPickerButton = (AwesomeButton) findViewById(R.id.multiPickerButton);
+        AwesomeButton b = (AwesomeButton) findViewById(R.id.btn_send);
+        //callImageView = (ImageView) findViewById(R.id.call);
+       // messageImageView = (ImageView) findViewById(R.id.message);
         //contactUsTextView = (TextView) findViewById(R.id.contact_us);
 
         b.setOnClickListener(new View.OnClickListener() {
@@ -94,13 +102,42 @@ Bundle bundle = getIntent().getExtras();
                 uploadComplain();
             }
         });
+
+
+
+        btnSms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtUjumbe = (EditText) findViewById(R.id.ujumbe);
+
+
+                Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+                smsIntent.setType("vnd.android-dir/mms-sms");
+                smsIntent.putExtra("address", phoneNumbe);
+                smsIntent.putExtra("sms_body",txtUjumbe.getText().toString());
+                startActivity(smsIntent);
+
+
+
+            }
+        });
+
+
+
+        btnCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:"+ phoneNumbe));
+                startActivity(intent);
+            }
+        });
         multiCaptureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (Utils.hasCameraHardware(PickerActivity.this)){
-                    //initiateMultiCapture();
-                   // uploadMultipleFiles();
+                    initiateMultiCapture();
                 }
                 else
                     Utils.showLongSnack(parentLayout, "Sorry. Your device does not have a camera.");
@@ -234,11 +271,11 @@ Bundle bundle = getIntent().getExtras();
 
     // Uploading Image/Video
     private void uploadComplain() {
-
+        txtUjumbe = (EditText) findViewById(R.id.ujumbe);
             progressDialog.show();
 
             Complain complain = new Complain();
-            complain.setDesc("test compplain form android");
+            complain.setDesc(txtUjumbe.getText().toString().trim());
             complain.setInstitutionId(institutionId);
 
             ApiConfig getResponse = AppConfig.getRetrofit().create(ApiConfig.class);

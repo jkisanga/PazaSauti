@@ -3,6 +3,7 @@ package com.tanzania.jkisanga.pazasauti.app;
 import com.tanzania.jkisanga.pazasauti.pojo.Attachment;
 import com.tanzania.jkisanga.pazasauti.pojo.Complain;
 import com.tanzania.jkisanga.pazasauti.pojo.Institution;
+import com.tanzania.jkisanga.pazasauti.pojo.Registration;
 
 import java.util.List;
 
@@ -48,5 +49,8 @@ public interface ApiConfig {
 
     @GET("api/institutions")
     Call<List<Institution>> getInstitutions();
+
+ @POST("api/regstrations")
+    Call<List<Registration>> postRegistation();
 
 }

@@ -1,100 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.tanzania.jkisanga.pazasauti.activity.PickerActivity"
-    tools:showIn="@layout/activity_picker">
-  <RelativeLayout
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      tools:layout_editor_absoluteY="8dp"
-      tools:layout_editor_absoluteX="0dp">
+    xmlns:awesome="http://schemas.android.com/apk/res-auto"
+    android:scrollbars="none"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".activity.MainActivity">
+
     <LinearLayout
-        android:id="@+id/line1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:layout_width="@dimen/margin_1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <android.support.v7.widget.RecyclerView
+            android:background="@drawable/placeholder"
+            android:layout_below="@+id/line2"
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="310dp"
+            android:scaleType="centerCrop"
+            android:gravity="center"
+            android:scrollbars="vertical"
+            />
+
+        <EditText
+            android:hint="Andika ujumbe hapa ..."
+            android:id="@+id/ujumbe"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Multi Capture"
-            android:id="@+id/multiCaptureButton"
-            android:textAllCaps="true"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="@dimen/margin_1"
+             />
+        <LinearLayout
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="send"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <cyd.awesome.material.AwesomeButton
+                android:id="@+id/multiCaptureButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="Piga picha"
+                awesome:awesome_font="font_awesome"
+                awesome:awesome_icon_right="FA_CAMERA"
+                android:layout_span="1"
+
+                awesome:awesome_rounded_corners="true"
+                awesome:awesome_type="bootstrap_primary" />
+
+            <cyd.awesome.material.AwesomeButton
+                android:id="@+id/multiPickerButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:layout_weight="1"
+                awesome:awesome_font="font_awesome"
+                awesome:awesome_icon_right="FA_PICTURE_O"
+                android:layout_span="1"
+                android:text="Chagua Picha"
+                awesome:awesome_rounded_corners="true"
+                awesome:awesome_type="bootstrap_primary" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <cyd.awesome.material.AwesomeButton
+                android:id="@+id/phone_call"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="Piga Simu"
+                awesome:awesome_font="font_awesome"
+                awesome:awesome_icon_right="FA_PHONE"
+                android:layout_span="1"
+
+                awesome:awesome_rounded_corners="true"
+                awesome:awesome_type="bootstrap_primary" />
+
+            <cyd.awesome.material.AwesomeButton
+                android:id="@+id/message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:layout_weight="1"
+                awesome:awesome_font="font_awesome"
+                awesome:awesome_icon_right="FA_EDIT"
+                android:layout_span="1"
+                android:text="Tuma kama sms"
+                awesome:awesome_rounded_corners="true"
+                awesome:awesome_type="bootstrap_primary" />
+
+
+        </LinearLayout>
+
+
+
+
+
+        <cyd.awesome.material.AwesomeButton
             android:id="@+id/btn_send"
-            android:textAllCaps="true"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="@dimen/margin_1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Multi Picker"
-            android:id="@+id/multiPickerButton"
-            android:textAllCaps="true"
-            android:layout_weight="1"/>
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:text="Tuma"
+            awesome:awesome_font="font_awesome"
+            awesome:awesome_icon_right="FA_SEND"
+            android:layout_span="1"
+            android:layout_weight="1"
+            awesome:awesome_rounded_corners="true"
+            awesome:awesome_type="bootstrap_primary" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_below="@+id/line1"
-        android:id="@+id/line2"
-        android:background="@color/custom_progress_bg_color"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <ImageView
-            android:id="@+id/call"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_5"
-            android:layout_marginRight="@dimen/margin_10"
-            android:src="@drawable/ic_phone_grey"
-            android:tint="@color/themeColor"/>
-
-
-        <ImageView
-            android:id="@+id/message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_10"
-            android:layout_marginRight="@dimen/margin_5"
-            android:src="@drawable/ic_message_grey"
-            android:tint="@color/themeColor"/>
-    </LinearLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/line2"
-        android:id="@+id/recycler_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:scrollbars="vertical"
-        tools:layout_editor_absoluteY="13dp"
-        tools:layout_editor_absoluteX="8dp" />
-
-      <LinearLayout
-          android:gravity="bottom|center"
-          android:orientation="horizontal"
-          android:layout_below="@+id/recycler_view"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content">
-          <EditText
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content" />
-          <ImageButton
-              android:src="@drawable/ic_camera"
-              android:textAlignment="center"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content" />
-      </LinearLayout>
-
-   </RelativeLayout>
-
-</android.support.constraint.ConstraintLayout>
+</ScrollView>
