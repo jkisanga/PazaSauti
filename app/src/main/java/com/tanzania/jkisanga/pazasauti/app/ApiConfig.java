@@ -51,6 +51,6 @@ public interface ApiConfig {
     Call<List<Institution>> getInstitutions();
 
  @POST("api/regstrations")
-    Call<List<Registration>> postRegistation();
+    Call<Registration> postRegistation(@Body Registration registration);
 
 }

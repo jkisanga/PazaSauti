@@ -108,14 +108,17 @@ public class PickerActivity extends AppCompatActivity {
         btnSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtUjumbe = (EditText) findViewById(R.id.ujumbe);
+//                txtUjumbe = (EditText) findViewById(R.id.ujumbe);
+//
+//
+//                Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+//                smsIntent.setType("vnd.android-dir/mms-sms");
+//                smsIntent.putExtra("address", phoneNumbe);
+//                smsIntent.putExtra("sms_body",txtUjumbe.getText().toString());
+//                startActivity(smsIntent);
 
-
-                Intent smsIntent = new Intent(Intent.ACTION_VIEW);
-                smsIntent.setType("vnd.android-dir/mms-sms");
-                smsIntent.putExtra("address", phoneNumbe);
-                smsIntent.putExtra("sms_body",txtUjumbe.getText().toString());
-                startActivity(smsIntent);
+                Intent intent = new Intent(PickerActivity.this, RegisterActivity.class);
+                startActivity(intent);
 
 
 

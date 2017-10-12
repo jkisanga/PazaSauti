@@ -36,13 +36,7 @@
         <activity
             android:name=".activity.InstitutionActivity"
             android:label="@string/title_activity_institution"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activity.PickerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
@@ -51,7 +45,16 @@
         <activity
             android:name=".activity.RegisterActivity"
             android:label="@string/title_activity_register"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.WallActivity"
+            android:label="@string/title_activity_wall"></activity>
     </application>
 
 </manifest>

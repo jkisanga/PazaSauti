@@ -30,8 +30,8 @@ public class AppConfig {
     public static final String KEY_PARAMS = "PARAMS";
 
 
-    //private static String BASE_URL = "http://192.168.43.196:8080/pazasautiweb/public/";
-    private static String BASE_URL = "http://pazasauti.android.co.tz/";
+    private static String BASE_URL = "http://192.168.43.196:8080/pazasautiweb/public/";
+   // private static String BASE_URL = "http://pazasauti.android.co.tz/";
 
     private static String BASE_URL1 = "http://192.168.43.196:8080/fileUpload/";
 
