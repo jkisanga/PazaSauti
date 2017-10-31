@@ -44,8 +44,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.RegisterActivity"
-            android:label="@string/title_activity_register"
+            android:label="@string/title_activity_institution"
             android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -54,7 +55,13 @@
         </activity>
         <activity
             android:name=".activity.WallActivity"
-            android:label="@string/title_activity_wall"></activity>
+            android:label="@string/title_activity_institution">
+
+        </activity>
+        <activity
+            android:name=".activity.PostDetailActivity"
+            android:label="@string/title_activity_post_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

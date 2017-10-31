@@ -1,8 +1,11 @@
 package com.tanzania.jkisanga.pazasauti.app;
 
 import com.tanzania.jkisanga.pazasauti.pojo.Attachment;
+import com.tanzania.jkisanga.pazasauti.pojo.Comment;
 import com.tanzania.jkisanga.pazasauti.pojo.Complain;
 import com.tanzania.jkisanga.pazasauti.pojo.Institution;
+import com.tanzania.jkisanga.pazasauti.pojo.Like;
+import com.tanzania.jkisanga.pazasauti.pojo.Post;
 import com.tanzania.jkisanga.pazasauti.pojo.Registration;
 
 import java.util.List;
@@ -16,6 +19,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 /**
  * Created by Dell on 10/3/2017.
@@ -50,7 +54,22 @@ public interface ApiConfig {
     @GET("api/institutions")
     Call<List<Institution>> getInstitutions();
 
+    @GET("api/comments/{id}")
+    Call<List<Comment>> getComments(@Path("id") int id);
+
+    @GET("api/complains")
+    Call<List<Post>> getPosts();
+
  @POST("api/regstrations")
     Call<Registration> postRegistation(@Body Registration registration);
+
+ @POST("api/comments")
+    Call<Comment> postComments(@Body Comment comment);
+
+ @POST("api/votes")
+    Call<Like> postLiks(@Body Like like);
+
+ @POST("api/complains/{id}/{viewCounter}")
+    Call<Complain> postViewCounter(@Path("id") int id, @Path("viewCounter") int viewCounter);
 
 }

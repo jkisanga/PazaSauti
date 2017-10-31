@@ -4,7 +4,7 @@ package com.tanzania.jkisanga.pazasauti.pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Attachment {
+public class Comment {
 
     @SerializedName("id")
     @Expose
@@ -12,9 +12,15 @@ public class Attachment {
     @SerializedName("complain_id")
     @Expose
     private Integer complainId;
-    @SerializedName("file_path")
+    @SerializedName("comment")
     @Expose
-    private String filePath;
+    private String comment;
+    @SerializedName("phone_id")
+    @Expose
+    private String phoneId;
+    @SerializedName("user")
+    @Expose
+    private String user;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
@@ -41,12 +47,28 @@ public class Attachment {
         this.complainId = complainId;
     }
 
-    public String getFilePath() {
-        return filePath;
+    public String getComment() {
+        return comment;
     }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getPhoneId() {
+        return phoneId;
+    }
+
+    public void setPhoneId(String phoneId) {
+        this.phoneId = phoneId;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public String getCreatedAt() {
@@ -65,12 +87,6 @@ public class Attachment {
         this.updatedAt = updatedAt;
     }
 
-    public Object getDeletedAt() {
-        return deletedAt;
-    }
 
-    public void setDeletedAt(Object deletedAt) {
-        this.deletedAt = deletedAt;
-    }
 
 }

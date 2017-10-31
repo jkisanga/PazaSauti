@@ -4,17 +4,20 @@ package com.tanzania.jkisanga.pazasauti.pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Attachment {
+public class Like {
 
     @SerializedName("id")
     @Expose
     private Integer id;
+    @SerializedName("phone_id")
+    @Expose
+    private String phoneId;
+    @SerializedName("vote")
+    @Expose
+    private Integer vote;
     @SerializedName("complain_id")
     @Expose
     private Integer complainId;
-    @SerializedName("file_path")
-    @Expose
-    private String filePath;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
@@ -33,20 +36,28 @@ public class Attachment {
         this.id = id;
     }
 
+    public String getPhoneId() {
+        return phoneId;
+    }
+
+    public void setPhoneId(String phoneId) {
+        this.phoneId = phoneId;
+    }
+
+    public Integer getVote() {
+        return vote;
+    }
+
+    public void setVote(int vote) {
+        this.vote = vote;
+    }
+
     public Integer getComplainId() {
         return complainId;
     }
 
     public void setComplainId(Integer complainId) {
         this.complainId = complainId;
-    }
-
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
     }
 
     public String getCreatedAt() {

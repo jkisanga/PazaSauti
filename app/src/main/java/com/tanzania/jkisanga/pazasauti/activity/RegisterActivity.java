@@ -2,12 +2,14 @@ package com.tanzania.jkisanga.pazasauti.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -34,14 +36,9 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        progressDialog = new ProgressDialog(this);
-        // SQLite database handler
-        db = new SQLiteHandler(getApplicationContext());
-
         // Session manager
         session = new SessionManager(getApplicationContext());
 
-        // Check if user is already logged in or not
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
             Intent intent = new Intent(RegisterActivity.this, WallActivity.class);
@@ -51,15 +48,42 @@ public class RegisterActivity extends AppCompatActivity {
             postRegistration();
         }
 
+
+
+
+        progressDialog = new ProgressDialog(this);
+        // SQLite database handler
+        db = new SQLiteHandler(getApplicationContext());
+        Button btnSajili = (Button) findViewById(R.id.btnSajili);
+
+
+        btnSajili.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Check if user is already logged in or not
+                if (session.isLoggedIn()) {
+                    // User is already logged in. Take him to main activity
+                    Intent intent = new Intent(RegisterActivity.this, WallActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    postRegistration();
+                }
+            }
+        });
+
     }
 
     private void postRegistration() {
         progressDialog.show();
+        EditText simu, jina;
+        jina = (EditText) findViewById(R.id.jina);
+        simu = (EditText) findViewById(R.id.simu);
 
         Registration reg = new Registration();
-        reg.setName("Joshua Kisanga");
-        reg.setPhoneNo("0713991800");
-        reg.setPhoneId("345678876523456786");
+        reg.setName(jina.getText().toString().trim());
+        reg.setPhoneNo(simu.getText().toString().trim());
+        reg.setPhoneId(Build.SERIAL);
         reg.setToken("456666387837483783478374");
 
         ApiConfig getResponse = AppConfig.getRetrofit().create(ApiConfig.class);

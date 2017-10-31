@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,6 +17,8 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +30,7 @@ import android.widget.Toast;
 import com.tanzania.jkisanga.pazasauti.R;
 import com.tanzania.jkisanga.pazasauti.app.ApiConfig;
 import com.tanzania.jkisanga.pazasauti.app.AppConfig;
+import com.tanzania.jkisanga.pazasauti.app.SQLiteHandler;
 import com.tanzania.jkisanga.pazasauti.app.ServerResponse;
 import com.tanzania.jkisanga.pazasauti.pojo.Attachment;
 import com.tanzania.jkisanga.pazasauti.pojo.Complain;
@@ -51,7 +55,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PickerActivity extends AppCompatActivity {
+import static com.tanzania.jkisanga.pazasauti.app.SQLiteHandler.KEY_ID;
+import static com.tanzania.jkisanga.pazasauti.app.SQLiteHandler.KEY_NAME;
+
+public class PickerActivity extends BaseActivity {
 
     public static final String TAG = "PickerActivity";
     RecyclerView recyclerView;
@@ -67,6 +74,7 @@ public class PickerActivity extends AppCompatActivity {
     ArrayList<Image> imagesList = new ArrayList<>();
     ProgressDialog progressDialog;
     EditText txtUjumbe;
+    private SQLiteHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +84,8 @@ public class PickerActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         btnCall = (AwesomeButton) findViewById(R.id.phone_call);
         progressDialog.setMessage("uploading...");
+        // SQLite database handler
+        db = new SQLiteHandler(getApplicationContext());
     Bundle bundle = getIntent().getExtras();
         if(bundle != null){
             institutionId = bundle.getInt(AppConfig.ID);
@@ -246,18 +256,23 @@ public class PickerActivity extends AppCompatActivity {
                 public void onResponse(Call<Attachment> call, Response<Attachment> response) {
                     Log.d(TAG, "onResponse: " + response.body());
                     Attachment serverResponse = response.body();
-                    if (serverResponse != null) {
-                        if (serverResponse.isSuccess()) {
-                            Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                        } else {
-                            //Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        assert serverResponse != null;
-                        Log.v("Response", serverResponse.toString());
-                    }
+
+                    txtUjumbe.setText(null);
+                    txtUjumbe.clearFocus();
+                    hideKeyBoard();
+
+//                    if (serverResponse != null) {
+//                        if (serverResponse.()) {
+//                            Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                            //Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            //Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    } else {
+//                        assert serverResponse != null;
+//                        Log.v("Response", serverResponse.toString());
+//                    }
                     progressDialog.dismiss();
                 }
 
@@ -278,8 +293,16 @@ public class PickerActivity extends AppCompatActivity {
             progressDialog.show();
 
             Complain complain = new Complain();
+        File file = new File(imagesList.get(0).imagePath);
+        String filename = file.getName();
+          filename = filename.replaceAll("\\s+","");
+          filename = filename.replaceAll("-","_");
             complain.setDesc(txtUjumbe.getText().toString().trim());
             complain.setInstitutionId(institutionId);
+            complain.setRegistrationId(Integer.valueOf(db.getUserDetails().get(KEY_ID)));
+            complain.setIsPrivate(false);
+            complain.setPhoneId(Build.SERIAL);
+
 
             ApiConfig getResponse = AppConfig.getRetrofit().create(ApiConfig.class);
             Call<Complain> call = getResponse.postComplains(complain);
@@ -290,6 +313,10 @@ public class PickerActivity extends AppCompatActivity {
                     if(response.isSuccessful() && serverResponse != null){
 
                         uploadMultipleFiles(serverResponse.getId());
+                        txtUjumbe.setText(null);
+                        txtUjumbe.clearFocus();
+                        hideKeyBoard();
+                        startActivity(new Intent(PickerActivity.this, WallActivity.class));
                     }else {
                         assert serverResponse != null;
                     }
@@ -304,5 +331,34 @@ public class PickerActivity extends AppCompatActivity {
             });
         }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_camera) {
+
+            // Do something
+            uploadComplain();
+            return true;
+        }
+//        if (id == R.id.action_send) {
+//
+//            // Do something
+//            return true;
+//        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 }

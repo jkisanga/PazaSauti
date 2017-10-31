@@ -5,7 +5,7 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Complain {
+public class Post {
 
     @SerializedName("id")
     @Expose
@@ -21,13 +21,16 @@ public class Complain {
     private String desc;
     @SerializedName("isPrivate")
     @Expose
-    private Boolean isPrivate;
+    private Integer isPrivate;
     @SerializedName("like_count")
     @Expose
     private Integer likeCount;
-    @SerializedName("dislike_count")
+    @SerializedName("comment_count")
     @Expose
-    private Integer dislikeCount;
+    private Integer commentCount;
+    @SerializedName("view_count")
+    @Expose
+    private Integer viewCount;
     @SerializedName("phone_id")
     @Expose
     private String phoneId;
@@ -43,6 +46,12 @@ public class Complain {
     @SerializedName("deleted_at")
     @Expose
     private Object deletedAt;
+    @SerializedName("institution")
+    @Expose
+    private String institution;
+    @SerializedName("user")
+    @Expose
+    private String user;
 
     public Integer getId() {
         return id;
@@ -76,11 +85,11 @@ public class Complain {
         this.desc = desc;
     }
 
-    public Boolean getIsPrivate() {
+    public Integer getIsPrivate() {
         return isPrivate;
     }
 
-    public void setIsPrivate(Boolean isPrivate) {
+    public void setIsPrivate(Integer isPrivate) {
         this.isPrivate = isPrivate;
     }
 
@@ -92,12 +101,20 @@ public class Complain {
         this.likeCount = likeCount;
     }
 
-    public Integer getDislikeCount() {
-        return dislikeCount;
+    public Integer getCommentCount() {
+        return commentCount;
     }
 
-    public void setDislikeCount(Integer dislikeCount) {
-        this.dislikeCount = dislikeCount;
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    public Integer getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(Integer viewCount) {
+        this.viewCount = viewCount;
     }
 
     public String getPhoneId() {
@@ -132,6 +149,28 @@ public class Complain {
         this.updatedAt = updatedAt;
     }
 
+    public Object getDeletedAt() {
+        return deletedAt;
+    }
 
+    public void setDeletedAt(Object deletedAt) {
+        this.deletedAt = deletedAt;
+    }
 
+    public String getInstitution() {
+        return institution;
+    }
+
+    public void setInstitution(String institution) {
+        this.institution = institution;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+    
 }
